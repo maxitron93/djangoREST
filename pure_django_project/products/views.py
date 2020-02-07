@@ -45,7 +45,7 @@ def product_detail(request, pk):
 def manufacturers_list(request):
     try:
         manufacturers = Manufacturer.objects.filter(active=True)
-        data = {'manufacturers': list(manufacturers.values('pk', 'name'))}
+        data = {'manufacturers': list(manufacturers.values('pk', 'name', 'location'))}
         response = JsonResponse(data)
     except Manufacturer.DoesNotExist:
         response = JsonResponse({
@@ -62,7 +62,12 @@ def manufacturer_detail(request, pk):
         manufacturer = Manufacturer.objects.get(pk=pk)
         products = Product.objects.filter(manufacturer=manufacturer)
         data = {
-            'manufacturer': manufacturer.name,
+            'manufacturer': {
+                'pk': manufacturer.pk,
+                'name': manufacturer.name,
+                'location': manufacturer.location,
+                'active': manufacturer.active,
+            },
             'products': list(products.values('pk', 'name', 'price', 'quantity'))
         }
         response = JsonResponse(data)
