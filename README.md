@@ -31,8 +31,21 @@ Django REST Framework provides two wrappers we can use to write API views:
 
 These wrappers will get all the code that is necessary to <strong>receive request instances</strong>, <strong>provide an appropriate response</strong> and <strong>handle exceptions</strong> such as the ParseError Exception that occurs when accessing request.data with malformed input.
 
-#### API View Class
+#### APIView Class
 
 As with 'pure' django, using View Classes makes it easy and fast to create reliable Web Apps, and by reusing common functionalities, it also helps keep our code DRY. 
 
+#### Validation
+
+Validation can be added to serializers. There are many pre-made validators, but we can also easily create our own validation logic in each serializer.
+
+#### ModelSerializer Class
+
+ModelSerializer allows us to speed up the creation of Serializers based on models we defined, providing us all the code that is needed for the most common development use cases.
+
+A ModelSerializer is just a regular Serializer, except that:
+
+- A set of default fields are automatically populated.
+- A set of default validators are automatically populated.
+- Default `.create()` and `update()` implementations are provided. 
 
