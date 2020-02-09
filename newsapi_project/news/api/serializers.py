@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from news.models import Article
+from news.models import Article, Journalist
 from datetime import datetime
 from django.utils. timesince import timesince
 
@@ -47,18 +47,22 @@ from django.utils. timesince import timesince
 #         else:
 #             return value
 
-
 # Using a ModelSerializer
 class ArticleSerializer(serializers.ModelSerializer):
 
     # Add a new field. Gives the user access to this new field, but doesn't add it to the database.
     time_since_publication = serializers.SerializerMethodField()
+    # author_name = serializers.SerializerMethodField()
+    # author = JournalistSerializer() # Returns the name of the author instead of its ID
 
     class Meta:
         model = Article
-        # fields = '__all__' # serialize all fields
-        # fields = ('title', 'desciption', 'body') # serialize only these fields
-        exclude = ('id',) # serialize all fields except the id field
+        fields = '__all__' # serialize all fields
+        # fields = ('title', 'description', 'body') # serialize only these fields
+        # exclude = ('id',) # serialize all fields except the id field
+
+    # def get_author_name(self, article):
+    #     return f'{article.author.first_name} {article.author.last_name}'
 
     def get_time_since_publication(self, article):
         publication_date = article.publication_date
@@ -81,3 +85,15 @@ class ArticleSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError('The title must be at least 10 characters long')
         else:
             return value
+
+# Using a ModelSerializer
+class JournalistSerializer(serializers.ModelSerializer):
+
+    # many=True because this serializer is going to be used to serialize the whole query set
+    # read_only=True so we can create new Journalist instances without needing to pass an article
+    articles = ArticleSerializer(many=True, read_only=True) # When calling a journalist, show all their articles
+
+    class Meta:
+        model = Journalist
+        fields = '__all__'
+
