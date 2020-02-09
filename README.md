@@ -49,3 +49,13 @@ A ModelSerializer is just a regular Serializer, except that:
 - A set of default validators are automatically populated.
 - Default `.create()` and `update()` implementations are provided. 
 
+## DRF Level 2
+
+- Use <strong>GenericAPIView</strong> and <strong>Mixin</strong> classes
+
+- Customize <strong>Generic</strong> class-based views
+
+- Group the results provided by your API with a <strong>pagination</strong> system
+
+- Secure your web API with a <strong>Permissions</strong> System
+
