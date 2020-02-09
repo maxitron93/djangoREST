@@ -65,4 +65,12 @@ CRUD operations in a model-backed API will be implemented in the same way in mos
 
 The GenericAPIView class is often used with Mixins - classes that provide further pre-built functionality to our views. Mixin classes provide <strong>action methods</strong> such as ```.list()``` or ```.create()``` rather than defining the handler methods, such as ```.get()``` or ```.post()``` directly, as we did using the APIView class.
 
+#### Concrete View Classes
+
+Extension of the GenericAPIView class and this Mixins that offer the functionality that the class is meant to provide. 
+
+For example, RetrieveUpdateAPIView will extend the <strong>GenericAPIView</strong> class plus both <strong>RetrieveModelMixin</strong> and <strong>UpdateModelMixin</strong>.
+
+These are the fastest to write, and fastest to read, but are also the most 'magica'. It's important to know how they can be used, and how they can be customised when needed.
+
 
