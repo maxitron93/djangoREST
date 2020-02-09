@@ -77,3 +77,7 @@ These are the fastest to write, and fastest to read, but are also the most 'magi
 
 Can be used to secure REST API endpoints. This menas we can grant access to certain APIs based on <strong>authentication</strong> and <strong>authorization</strong>.
 
+#### Pagination
+
+Pagination allows us to group the results provided by our API's List Views to make it easier for users and clients to retreive our data.
+

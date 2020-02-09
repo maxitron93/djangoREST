@@ -6,6 +6,7 @@ from books.api.serializers import BookSerializer, ReviewSerializer
 from rest_framework import permissions
 from books.api.permissions import IsAdminUserOrReadOnly, IsReviewAuthorOrReadOnly
 from rest_framework.exceptions import ValidationError
+from books.api.pagination import SmallSetPagination
 
 # Using GenericAPIView class with mixins
 # class BookListCreateAPIView(mixins.ListModelMixin,
@@ -28,13 +29,15 @@ from rest_framework.exceptions import ValidationError
 
 # Using Concrete View Class
 class BookListCreateAPIView(generics.ListCreateAPIView):
-    queryset = Book.objects.all()
+    queryset = Book.objects.all().order_by('-id') # Need to order the books when using pagination or it will risk an error
     serializer_class = BookSerializer
     # Adding permissions to this specific endpoint
-    permission_classes = [
+    permission_class = [
         # permissions.IsAuthenticated
         IsAdminUserOrReadOnly # Custom permission class
     ]
+    # Adding our custom pagination class
+    pagination_class = SmallSetPagination
 
 # Using Concrete View Class
 class BookDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
@@ -62,6 +65,7 @@ class ReviewCreateAPIView(generics.CreateAPIView):
         review_queryset = Review.objects.filter(book=book,
                                                 review_author=review_author)
 
+        # Create validation criteria: User can only review each book once
         if review_queryset.exists():
             raise ValidationError('You Have Already Reviewed this Book!')
         else:
@@ -73,3 +77,4 @@ class ReviewDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [
         IsReviewAuthorOrReadOnly  # Custom permission class
     ]
+
