@@ -22,6 +22,7 @@ Serializers also provide deserialization, allowing parsed data the be converted 
 <strong>Essentially, serialization is converting from complex datatypes of Python data types, and deserialization is converting from Python data types to complex data types.</strong>
 
 #### @api_view decorator
+
 Django REST Framework provides two wrappers we can use to write API views:
 
 - The ```@api_view``` decorator, for working with funciton-based API views
@@ -30,6 +31,8 @@ Django REST Framework provides two wrappers we can use to write API views:
 
 These wrappers will get all the code that is necessary to <strong>receive request instances</strong>, <strong>provide an appropriate response</strong> and <strong>handle exceptions</strong> such as the ParseError Exception that occurs when accessing request.data with malformed input.
 
+#### API View Class
 
+As with 'pure' django, using View Classes makes it easy and fast to create reliable Web Apps, and by reusing common functionalities, it also helps keep our code DRY. 
 
 
