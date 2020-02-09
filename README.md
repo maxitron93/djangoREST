@@ -71,6 +71,9 @@ Extension of the GenericAPIView class and this Mixins that offer the functionali
 
 For example, RetrieveUpdateAPIView will extend the <strong>GenericAPIView</strong> class plus both <strong>RetrieveModelMixin</strong> and <strong>UpdateModelMixin</strong>.
 
-These are the fastest to write, and fastest to read, but are also the most 'magica'. It's important to know how they can be used, and how they can be customised when needed.
+These are the fastest to write, and fastest to read, but are also the most 'magical'. It's important to know how they can be used, and how they can be customised when needed.
 
+#### Permissions
+
+Can be used to secure REST API endpoints. This menas we can grant access to certain APIs based on <strong>authentication</strong> and <strong>authorization</strong>.
 

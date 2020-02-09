@@ -3,6 +3,8 @@ from rest_framework import mixins
 from rest_framework.generics import get_object_or_404
 from books.models import Book, Review
 from books.api.serializers import BookSerializer, ReviewSerializer
+from rest_framework import permissions
+from books.api.permissions import IsAdminUserOrReadOnly
 
 # Using GenericAPIView class with mixins
 # class BookListCreateAPIView(mixins.ListModelMixin,
@@ -27,11 +29,21 @@ from books.api.serializers import BookSerializer, ReviewSerializer
 class BookListCreateAPIView(generics.ListCreateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+    # Adding permissions to this specific endpoint
+    permission_classes = [
+        # permissions.IsAuthenticated
+        IsAdminUserOrReadOnly # Custom permission class
+    ]
 
 # Using Concrete View Class
 class BookDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+    # Adding permissions to this specific endpoint
+    permission_classes = [
+        # permissions.IsAdminUser
+        IsAdminUserOrReadOnly # Custom permission class
+    ]
 
 class ReviewCreateAPIView(generics.CreateAPIView):
     queryset = Review.objects.all()
