@@ -60,7 +60,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1581227049528</updated>
-      <workItem from="1581227051559" duration="180000" />
+      <workItem from="1581227051559" duration="1994000" />
     </task>
     <servers />
   </component>
@@ -76,5 +76,9 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="56" key="SettingsEditor/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1581227114011" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1581227327981">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1581227327981" />
   </component>
 </project>

@@ -59,3 +59,10 @@ A ModelSerializer is just a regular Serializer, except that:
 
 - Secure your web API with a <strong>Permissions</strong> System
 
+#### GenericAPIView and Mixins
+
+CRUD operations in a model-backed API will be implemented in the same way in most cases. GenericAPIView extends the APIView class, adding to this some very useful methods and attributes, so we don't have to keep writing the same code again and again.
+
+The GenericAPIView class is often used with Mixins - classes that provide further pre-built functionality to our views. Mixin classes provide <strong>action methods</strong> such as ```.list()``` or ```.create()``` rather than defining the handler methods, such as ```.get()``` or ```.post()``` directly, as we did using the APIView class.
+
+
