@@ -4,7 +4,8 @@ from rest_framework.generics import get_object_or_404
 from books.models import Book, Review
 from books.api.serializers import BookSerializer, ReviewSerializer
 from rest_framework import permissions
-from books.api.permissions import IsAdminUserOrReadOnly
+from books.api.permissions import IsAdminUserOrReadOnly, IsReviewAuthorOrReadOnly
+from rest_framework.exceptions import ValidationError
 
 # Using GenericAPIView class with mixins
 # class BookListCreateAPIView(mixins.ListModelMixin,
@@ -48,13 +49,27 @@ class BookDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 class ReviewCreateAPIView(generics.CreateAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
 
     # Override the method to customize what happens when creating a new Review instance
     def perform_create(self, serializer):
         book_pk = self.kwargs.get('book_pk')
         book = get_object_or_404(Book, pk=book_pk)
-        serializer.save(book=book)
+        review_author = self.request.user
+
+        review_queryset = Review.objects.filter(book=book,
+                                                review_author=review_author)
+
+        if review_queryset.exists():
+            raise ValidationError('You Have Already Reviewed this Book!')
+        else:
+            serializer.save(book=book, review_author = review_author)
 
 class ReviewDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+    permission_classes = [
+        IsReviewAuthorOrReadOnly  # Custom permission class
+    ]

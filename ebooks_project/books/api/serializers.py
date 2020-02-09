@@ -3,6 +3,8 @@ from books.models import Book, Review
 
 class ReviewSerializer(serializers.ModelSerializer):
 
+    review_author = serializers.StringRelatedField(read_only=True) # Bind the request user to the author field
+
     class Meta:
         model = Review
         exclude = ('book',)

@@ -9,3 +9,13 @@ class IsAdminUserOrReadOnly(permissions.IsAdminUser):
         # Returns True if is_admin=True or if request.method is GET, HEAD, or OPTIONS (Safe methods)
         return request.method in permissions.SAFE_METHODS or is_admin
 
+
+# Create new permission class by extending IsAdminUser class
+class IsReviewAuthorOrReadOnly(permissions.BasePermission):
+
+    # Override the has_object_permission method
+    def has_object_permission(self, request, view, obj):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        else:
+            return obj.review_author == request.user
