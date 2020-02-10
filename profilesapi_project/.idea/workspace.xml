@@ -25,6 +25,11 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\maxitron\Software\django\rest\profilesapi_project" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="profilesapi_project" type="Python.DjangoServer" factoryName="Django server">
       <module name="profilesapi_project" />
@@ -60,7 +65,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1581296368799</updated>
-      <workItem from="1581296371488" duration="2954000" />
+      <workItem from="1581296371488" duration="5444000" />
     </task>
     <servers />
   </component>

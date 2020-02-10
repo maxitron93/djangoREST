@@ -100,3 +100,55 @@ Pagination allows us to group the results provided by our API's List Views to ma
 #### Signals
 
 Signals allow certain senders to notify Receivers that an action has taken place elsewhere inthe framework. e.g. We can use signals to create a new instance of Profile when a new instance of User is created.
+
+#### Authentication
+
+Authentication is the system that lets us associate a series of identification credentials to an incoming request, obtaining critical information such as the specific user who sent the request.
+
+We can use this in conjunction with the permission system to decide whether or not to accept the incomming request, for exaple, based on the type of user who sent it.
+
+Authentication is always run at the start of the views, before the authorization check occurs, and before any other code is allowed to be executed.
+
+Authentication --> Authorization (permission) --> Code
+
+Authentication by itself won't allow or disallow incoming requests, it simply identifies the credentials that the request was made with.
+
+DRF provides different authentication systems out of the box. But we can also use third party packages to implement other systems, like JWT.
+
+- <strong>Basic authentication</strong>: The most primitave and least secure authentication system provided by DRF. The request/response cycle looks like this:
+    
+    1) The client makes a HTTP request to the server
+
+    2) The server responds with a HTTP401 Unauthorized response containing the WWW-Authenticate header, exaplining how to authenticate (e.g. WWW-Authenticate-Basic)
+
+    3) The client sends its auth credentials in base64 with the Authorization header. Authentication credentials are unencrypted
+
+    4) The server evaluates the access credentials and repsponds with 200 or 403, thereby authorizing or denying the client's request
+
+- <strong>Token authentication</strong>: This is the ideal system for authenticating smartphone and desktop clients. The request.response flow looks like this:
+    
+    1) The client sends its authentication credentials once
+
+    2) The server checks the credentials, and if they are valid it creates an exclusive signed token and sends it back to the client as a response
+
+    3) The client sends this token within the Authorization Header of every following request
+
+    4) The server checks the received token and if valid, allows the request to proceed
+
+    It's common to save this authentication token in either a cookie or in the browser's localStorage. But saving the authentication token to localStorage is very dangerous, as it makes it vulnerable to XSS attacks.
+
+    Using a httpOnly cookie is much safer because this way the token can't be accessed via JavaScript, but doing it this way means you lose the flexibility that you would get if you used localStorage.
+
+    JSON Web Token is a new standard which can be used for token-based authentication. One of the main differences with other token-based standards is that because of their structure, JWT tokens don't require databas validation.
+
+- <strong>Session authentication</strong>: Django REST Framework's official documentation suggests to use session authentication. This authentication scheme uses Django's default session backend for authentication. It's the safest and most appropriate way for authenticating AJAX clients that are running in the same session context as your website, and uses a combination of Sessions and Cookies. The request/response cycle looks like this:
+
+    1) The user sends their authentication credentials, typically using a Login Form
+    2) The server checks the data and if correct, it creates a corresponding Session Object that will be saved in the database, sending back to the client a Session ID
+    3) The Session ID gets saved in a cookin in the browser and will be part of every future request to the server, that will check it everytime
+    4) When the client logs out, the Session ID is destroyed by both the client and the server, and a new one will be created at the next login
+
+    If successfully authenticated using Session Authentication, Django will provide us the corresponding User Object, accessible via request.user. For non-authorized users, an AnonymousUser instance will be provided instead.
+
+    Important: Once authenticated via session auth, Django will require a valid CSRF token to be sent for any <strong>unsafe</strong> HTTP method request such as PUT, PATCH, POST, DELETE. The CSRF token is an important cross-site request forgery vulnerability protection.
+

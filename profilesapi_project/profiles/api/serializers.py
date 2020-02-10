@@ -25,3 +25,4 @@ class ProfileStatus(serializers.ModelSerializer):
     class Meta:
         model = ProfileStatus
         fields ='__all__'
+
