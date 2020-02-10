@@ -81,3 +81,19 @@ Can be used to secure REST API endpoints. This menas we can grant access to cert
 
 Pagination allows us to group the results provided by our API's List Views to make it easier for users and clients to retreive our data.
 
+## DRF Level 3
+
+- Knowledge of the main <strong>Authentication</strong> methods
+
+- Set up <strong>Registration</strong> and <strong>Authentication</strong> via REST
+
+- How to use <strong>Django-REST-Auth</strong>
+
+- Knowledge of <strong>Viewset</strong> and <strong>Router</strong> classes
+
+- How to do <strong>Filtering</strong> via DRF
+
+- How to write <strong>automated tests</strong> with Django and DRF
+
+- How to <strong>extend Django's User Model</strong> with a custom Profile Model
+
