@@ -97,3 +97,6 @@ Pagination allows us to group the results provided by our API's List Views to ma
 
 - How to <strong>extend Django's User Model</strong> with a custom Profile Model
 
+#### Signals
+
+Signals allow certain senders to notify Receivers that an action has taken place elsewhere inthe framework. e.g. We can use signals to create a new instance of Profile when a new instance of User is created.
