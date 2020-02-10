@@ -152,3 +152,16 @@ DRF provides different authentication systems out of the box. But we can also us
 
     Important: Once authenticated via session auth, Django will require a valid CSRF token to be sent for any <strong>unsafe</strong> HTTP method request such as PUT, PATCH, POST, DELETE. The CSRF token is an important cross-site request forgery vulnerability protection.
 
+#### Viewsets and Routers
+
+<strong>ViewSet</strong> classes allow us to combine the logic for a set of related views in a single class: a ViewSet could for example allow us to get a list of elements from a queryset, but also alowus to get  the details of a single instance of the same model.
+
+ViewSets work at the highest level of abstraction, compared with all the other APIViews covered here. They are another kind of class-based view that doesn't provide any method handlers like ```.get()``` or ```.post()```, and instead provide action methods like ```.list()``` and ```.create()```.
+
+ViewSets are typically used in combination with <strong>Router class</strong>, allowing us to automatically get a url path configuration that is appropriate to the different kind of actions that the ViewSet provides, following convention standards.
+
+#### Filtering
+
+By default, the views we've tried so far to list elements have returned whole querysets. Sometimes, we mught want to get specific results out of te same list endpoint, according to some predefined criteria. 
+
+That's where DRF's filtering system comes in handy!. We can customize the ```get_queryset()``` method in our views.
